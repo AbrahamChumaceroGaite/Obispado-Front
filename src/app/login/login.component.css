@@ -1,0 +1,83 @@
+.background {
+  width: 100%;
+  background-image: url("../../assets/Images/bg1.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.logo-obispado {
+  height: 200px;
+}
+
+.custom-text {
+  font-size: 1.35rem;
+}
+
+.container-login {
+  background-color: rgba(52, 44, 44, 0.412);
+  backdrop-filter: blur(11px);
+  width: 750px;
+}
+
+.mat-divider {
+  border-color: rgba(255, 255, 255, 0.741);
+}
+
+.account_img {
+  transform: scale(4);
+  color: white;
+}
+
+.btn {
+  background-color: #c91d0a;
+  color: white;
+}
+
+.btn:hover {
+  transition: all 0.5s;
+  background-color: #bf9663;
+  color: white;
+}
+
+.container-logo {
+  padding-top: 3rem;
+}
+
+@media (max-width: 768px) {
+  .account_img {
+    display: none;
+  }
+
+  .container-logo-obispado {
+    margin-top: 1.5rem;
+  }
+
+  .container-logo {
+    padding: 0;
+  }
+
+  .background {
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 576px) {
+  .logo-obispado {
+    display: none;
+  }
+
+  .account_img {
+    display: block;
+  }
+
+  .container-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .background {
+    overflow: hidden;
+  }
+}

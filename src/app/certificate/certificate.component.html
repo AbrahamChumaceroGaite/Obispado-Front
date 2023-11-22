@@ -1,0 +1,125 @@
+
+<!-- Se supone que aqui, al lado del "class=container" va lo que es  , sirve solo para mostrar o no el icono de carga, lo borre -->
+<div class="px-5 row justify-content-center">
+  <div class="mb-5 text-center">
+    <h2>CERTIFICADOS</h2>
+  </div>
+
+  <div class="input-group mb-3">
+    <a [routerLink]="['/addcertificate']" class="btn btn-success">Nuevo Certificado</a>
+    <input
+      [(ngModel)]="find"
+      type="search"
+      class="form-control rounded"
+      placeholder="Buscar"
+      aria-label="Search"
+      aria-describedby="search-addon"
+    />
+
+    <button class="btn btn-outline-secondary" type="button" (click)="Find()">
+      <i class="bi bi-search"></i>
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-secondary">
+      <thead>
+        <tr>
+          <th>LUGAR DE CONFIRMACION</th>
+          <th>CI</th>
+          <th>NOMBRE</th>
+          <th>APELLIDO</th>
+          <th>NOMBRE DE PADRE</th>
+          <th>NOMBRE DE MADRE</th>
+          <th colspan="4">ACCIONES</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngIf="certificateList?.length == 0">
+          <td colspan="10" style="text-align: center">
+            <span> No se encontraron resultados ...</span>
+          </td>
+        </tr>
+
+        <tr *ngFor="let certificate of certificateList">
+          <td>{{ certificate.ParishName }}</td>
+          <td>{{ certificate.ci }}</td>
+          <td>{{ certificate.name }}</td>
+          <td>{{ certificate.surName }}</td>
+          <td>{{ certificate.dad }}</td>
+          <td>{{ certificate.mother }}</td>
+
+          <td>
+            <a
+              routerLink="/certificate/{{ certificate.id }}/''"
+              class="btn btn-primary btn-sm">
+              <i class="bi bi-pencil-square"></i>
+            </a>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="delete(certificate.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+          <td>
+            <a (click)="printCertificate(certificate)"
+              class="btn btn-space btn-sm">
+              <i class="fa fa-print fa-2x"></i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex justify-content-center mt-4">
+    <div class="col-md-2">
+      <select class="form-control" (change)="Quantity($event)">
+        <option selected disabled>{{ optionSelect }}</option>
+        <option *ngFor="let web of list">{{ web }}</option>
+      </select>
+    </div>
+    <div class="col-md-10">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <button
+              class="page-link"
+              *ngIf="metaData.HasPreviousPage"
+              (click)="Preview()"
+            >
+              Anterior
+            </button>
+            <button
+              class="page-link disabled"
+              *ngIf="!metaData.HasPreviousPage"
+            >
+              Anterior
+            </button>
+          </li>
+
+          <li class="page-item">
+            <span class="page-link"
+              >{{ metaData.CurrentPage }} de {{ metaData.TotalPages }}</span
+            >
+          </li>
+
+          <li class="page-item">
+            <button
+              class="page-link"
+              *ngIf="metaData.HasNextPage"
+              (click)="Next()"
+            >
+              Siguiente
+            </button>
+
+            <button class="page-link disabled" *ngIf="!metaData.HasNextPage">
+              Siguiente
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  
+</div>

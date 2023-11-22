@@ -1,0 +1,177 @@
+
+<div class="px-5 row justify-content-center">
+  <div class="text-center mb-5 mt-4">
+    <h2>FIRMANTES</h2>
+  </div>
+
+  <div class="input-group mb-3">
+    <a [routerLink]="['/addSignatory']" class="btn btn-success">Nuevo Encargado</a>
+    <input
+      [(ngModel)]="find"
+      type="search"
+      class="form-control rounded"
+      placeholder="Buscar"
+      aria-label="Search"
+      aria-describedby="search-addon"
+    />
+
+    <button class="btn btn-outline-secondary" type="button" (click)="Find()">
+      <i class="bi bi-search"></i>
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-secondary">
+      <thead>
+        <tr>
+          <th>NOMBRE</th>
+          <th>APELLIDO</th>
+          <th>PUESTO</th>
+          <th>SELECCIONADO</th>
+          <th colspan="3">ACCIONES</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngIf="signatoriesList?.length == 0">
+          <td colspan="5" style="text-align: center">
+            <span> No se encontraron resultados ...</span>
+          </td>
+        </tr>
+        <tr *ngFor="let signatory of signatoriesList">
+          <td>{{ signatory.name }}</td>
+          <td>{{ signatory.surName }}</td>
+          <td>{{ signatory.position }}</td>
+          <td *ngIf="signatory.verified == true">
+            <i class="fa fa-check fa-2x"></i>
+          </td>
+          <td *ngIf="signatory.verified != true">
+            <i class="fa fa-times fa-2x"></i>
+          </td>
+          <td>
+            <a
+              (click)="updateSignatory(signatory.id)"
+              class="btn btn-space btn-success"
+              >Firmante</a
+            >
+          </td>
+          <td>
+            <a
+              routerLink="/signatory/{{ signatory.id }}"
+              class="btn btn-primary btn-sm"
+            >
+              <i class="bi bi-pencil-square"></i>
+            </a>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="delete(signatory.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <!-- <ul class="pagination">
+      <li class="page-item col-md-1">
+        <select class="form-control" (change)="Quantity($event)">
+          <option selected disabled>{{ optionSelect }}</option>
+          <option *ngFor="let web of list">{{ web }}</option>
+        </select>
+      </li>
+
+      &nbsp;
+      <li class="page-item">
+        <p
+          *ngIf="metaData.HasPreviousPage"
+          class="form-control"
+          type="button"
+          (click)="Preview()"
+        >
+          Anterior
+        </p>
+        <p *ngIf="!metaData.HasPreviousPage" class="form-control" type="button">
+          Anterior
+        </p>
+      </li>
+
+      <li class="page-item page-item">
+        <p class="form-control">{{ metaData.CurrentPage }}</p>
+      </li>
+
+      <li class="page-item">
+        <p
+          *ngIf="metaData.HasNextPage"
+          class="form-control"
+          type="button"
+          (click)="Next()"
+        >
+          Siguiente
+        </p>
+        <p *ngIf="!metaData.HasNextPage" class="form-control" type="button">
+          Siguiente
+        </p>
+      </li>
+    </ul>
+
+    <ul class="pagination">
+      <li class="page-item">
+        <label for="TotalPages"
+          >P&aacute;gina {{ metaData.CurrentPage }} de {{ metaData.TotalPages }}
+        </label>
+      </li>
+    </ul> -->
+
+
+    <!-- nueva paginacion -->
+    <div class="col-md-2">
+      <select class="form-control" (change)="Quantity($event)">
+        <option selected disabled>{{ optionSelect }}</option>
+        <option *ngFor="let web of list">{{ web }}</option>
+      </select>
+    </div>
+    <div class="col-md-10">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <button
+              class="page-link"
+              *ngIf="metaData.HasPreviousPage"
+              (click)="Preview()"
+            >
+              Anterior
+            </button>
+            <button
+              class="page-link disabled"
+              *ngIf="!metaData.HasPreviousPage"
+            >
+              Anterior
+            </button>
+          </li>
+
+          <li class="page-item">
+            <span class="page-link"
+              >{{ metaData.CurrentPage }} de {{ metaData.TotalPages }}</span
+            >
+          </li>
+
+          <li class="page-item">
+            <button
+              class="page-link"
+              *ngIf="metaData.HasNextPage"
+              (click)="Next()"
+            >
+              Siguiente
+            </button>
+
+            <button class="page-link disabled" *ngIf="!metaData.HasNextPage">
+              Siguiente
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
